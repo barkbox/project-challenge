@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DogProfile</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+  </head>
+
+  <body>
+    <div id="layout">
+      <header>
+        Dog Profile Demo
+        <div class="actions">
+          <% if current_user %>
+            <%= link_to 'Add your dog', new_dog_path %>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path %>
+          <% end %>
+        </div>
+      </header>
+      <div id="main">
+        <div class="notifications">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </div>
+        <%= yield %>
+      </div>
+      <div class="footer"></div>
+    </div>
+
+  </body>
+</html>

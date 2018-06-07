@@ -1,0 +1,7 @@
+<h1>Add Your Dog</h1>
+<%= simple_form_for Dog.new do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :image, as: :file %>
+  <%= f.button :submit %>
+<% end %>
