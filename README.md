@@ -1,19 +1,22 @@
-# Welcome
+# Overview
 
-This repository contains starter code for a technical assessment. The challenges can be done at home before coming in to discuss with the Bark team or can be done as a pairing exercise at the Bark office. Either way, we don't expect you to put more than an hour or two into coding. We recommend forking the repository and getting it running before starting the challenge if you choose the pairing approach.
+This is a private version of the project repo we send to candidates. It's a basic Rails CRUD app for displaying and editing dog profiles, where candidates can refactor existing code and add features as part of a technical assesment. Setup instructions are in the readme of the [public repo](https://github.com/barkbox/project-challenge).
 
-# Set up
+# Challenge Ideas
 
-Fork this repository and clone locally
+### Backend/Fullstack
+- Add pagination to index page
+- Add multiple images per dog (display and form)
+- Associate dogs with users
+- Allow editing only by owner
 
-You'll need [ruby 2.2.4](https://rvm.io/rvm/install) and [rails 5](http://guides.rubyonrails.org/getting_started.html#installing-rails) installed.
+### Frontend
+- Add a grid, layout work
+- On profile, add carousel
 
-Run `bundle install`
+# Additional Questions
+- What would you change before putting this on production?
 
-Initialize the data with `rake db:seed`
+# Challenge Solutions
+As we come up with solutions for these challenges, we will add them as branches.
 
-Run the specs with `rspec`
-
-Run the server with `rails s`
-
-View the site at http://localhost:3000
