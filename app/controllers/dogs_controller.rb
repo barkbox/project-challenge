@@ -14,6 +14,11 @@ class DogsController < ApplicationController
     end
   end
 
+  def update
+    dog.update_attributes(dog_params)
+    redirect_to dog
+  end
+
 
   private
 

@@ -1,0 +1,8 @@
+<h1>Edit Your Dog</h1>
+<%= simple_form_for dog do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :image, as: :file %>
+  <%= image_tag dog.images.first %>
+  <%= f.button :submit %>
+<% end %>
