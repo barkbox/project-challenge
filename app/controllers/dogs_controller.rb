@@ -6,7 +6,6 @@ class DogsController < ApplicationController
   def create
     @dog = Dog.new(dog_params)
     if @dog.save
-      binding.pry
       @dog.images.attach(params[:dog][:image])
       redirect_to @dog
     else
@@ -15,6 +14,7 @@ class DogsController < ApplicationController
   end
 
   def update
+    dog.images.attach(params[:dog][:image])
     dog.update_attributes(dog_params)
     redirect_to dog
   end
