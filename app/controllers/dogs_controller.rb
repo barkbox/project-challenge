@@ -6,7 +6,7 @@ class DogsController < ApplicationController
   def create
     @dog = Dog.new(dog_params)
     if @dog.save
-      @dog.images.attach(params[:dog][:image])
+      @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
       redirect_to @dog
     else
       render 'new', alert: @dog.errors.full_sentences
@@ -14,7 +14,7 @@ class DogsController < ApplicationController
   end
 
   def update
-    dog.images.attach(params[:dog][:image])
+    dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
     dog.update_attributes(dog_params)
     redirect_to dog
   end
