@@ -1,6 +1,6 @@
 <a href="<%= url_for(dog) %>">
-  <figure class=".dog-card">
-    <img src="<%= url_for(dog.images.first) %>" class="dog-photo">
-    <figcaption class="dog-name"><%= dog.name %></figcaption>
-  </figure>
+  <article>
+    <h2><%= dog.name %></h2>
+    <%= image_tag url_for(dog.images.first), alt: "Photo of #{dog.name}" %>
+  </article>
 </a>

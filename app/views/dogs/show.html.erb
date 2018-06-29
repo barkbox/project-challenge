@@ -1,5 +1,9 @@
-<figure class=".dog-card">
-  <img src="<%= url_for(dog.images.first) %>" class="dog-photo">
-  <figcaption class="dog-name"><%= dog.name %></figcaption>
-</figure>
-<p><%= dog.description %></p>
+<section>
+  <h2><%= dog.name %></h2>
+  <%= image_tag url_for(dog.images.first), alt: "Photo of #{dog.name}" %>
+  <p><%= dog.description %></p>
+
+  <%= link_to "Edit #{dog.name}'s Profile", edit_dog_path %>
+  <br>
+  <%= link_to "Delete #{dog.name}'s Profile", dog_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+</section>

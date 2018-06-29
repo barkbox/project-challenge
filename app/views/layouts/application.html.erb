@@ -12,13 +12,14 @@
   <body>
     <div id="layout">
       <header>
-        Dog Profile Demo
+        <h1><%= link_to 'Dog Profile Demo', root_path %></h1>
         <div class="actions">
           <% if current_user %>
             <%= link_to 'Add your dog', new_dog_path %>
             <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to 'Sign in', new_user_session_path %>
+            <%= link_to 'Sign up', new_user_registration_path %>
           <% end %>
         </div>
       </header>
