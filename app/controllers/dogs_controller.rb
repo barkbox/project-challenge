@@ -19,6 +19,11 @@ class DogsController < ApplicationController
     redirect_to dog
   end
 
+  def destroy
+    dog.destroy
+    redirect_to root_path
+  end
+
 
   private
 
