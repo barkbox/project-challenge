@@ -31,6 +31,10 @@ dogs = [
 
 dogs.each do |dog|
   dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description])
-  filename = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}.jpg")
-  dog.images.attach(io: File.open(filename), filename: "#{dog[:name].downcase}.jpg")
+  directory_name = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}", "*")
+
+  Dir.glob(directory_name).each do |filename|
+    dog.images.attach(io: File.open(filename), filename: filename.split("/").pop)
+    sleep 2
+  end
 end
