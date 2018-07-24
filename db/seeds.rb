@@ -26,7 +26,27 @@ dogs = [
   {
     name: 'Pete',
     description: 'Pete has a best friend named Lua'
-  }
+  },
+  {
+    name: 'Bijou',
+    description: 'Bijou is the fluffiest of them all'
+  },
+    {
+    name: 'Britta',
+    description: 'Britta has two different colored eyes'
+  },
+  {
+    name: 'Noodle',
+    description: 'Noodle is an Instagram celebrity'
+  },
+  {
+    name: 'Stella',
+    description: 'Stella loves to dig'
+  },
+  {
+    name: 'Tonks',
+    description: 'Tonks loves to run'
+  },
 ]
 
 dogs.each do |dog|
@@ -34,7 +54,9 @@ dogs.each do |dog|
   directory_name = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}", "*")
 
   Dir.glob(directory_name).each do |filename|
-    dog.images.attach(io: File.open(filename), filename: filename.split("/").pop)
-    sleep 2
+    if !dog.images.any?{|i| i.filename == filename}
+      dog.images.attach(io: File.open(filename), filename: filename.split("/").pop)
+      sleep 1
+    end
   end
 end
