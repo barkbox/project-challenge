@@ -1,5 +1,6 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :can_update?, only: :update
 
   # GET /dogs
   # GET /dogs.json
@@ -69,6 +70,14 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :description, images: [])
+      params.require(:dog).permit(:name, :description, images: []).tap do |w|
+        w[:user_id] = current_user.id
+      end
+    end
+    
+    def can_update?
+      unless @dog.owner == current_user
+        redirect_to @dog, notice: 'Dog can only be updated by owner.'
+      end
     end
 end
