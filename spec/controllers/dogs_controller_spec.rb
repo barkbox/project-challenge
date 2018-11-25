@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe DogsController, type: :controller do
+  before do
+    @user = create(:user)
+    allow(controller).to receive(:authenticate_user!).and_return(true)
+    allow(controller).to receive(:current_user).and_return(@user)
+  end
+  
   describe '#index' do
     it 'displays recent dogs' do
       2.times { create(:dog) }
@@ -25,11 +31,18 @@ RSpec.describe DogsController, type: :controller do
   end
   
   describe '#update' do
-    it 'updates a existing dog' do
-      dog = create(:dog)
-      updated_name = dog.name + 'updated'
+    let(:updated_name) { 'updated name' }
+    it 'updates an existing dog by owner' do
+      dog = create(:dog, user_id: @user.id)
       patch :update, params: { id: dog.id, dog: {name: updated_name}}
-      expect(assigns[:dog].name).to eq updated_name
+      expect(assigns[:dog].name).to eq(updated_name)
+    end
+    
+    it 'does not update if user is not dog\'s owner' do
+      dog = create(:dog)
+      original_name = dog.name
+      patch :update, params: { id: dog.id, dog: {name: updated_name}}
+      expect(dog.reload.name).to eq(original_name)
     end
   end
 end

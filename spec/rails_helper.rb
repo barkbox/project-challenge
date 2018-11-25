@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_bot'
+require 'support/session_helpers'
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -66,4 +67,8 @@ Shoulda::Matchers.configure do |config|
     # Choose the rails library
     with.library :rails
   end
+end
+
+RSpec.configure do |config|
+  config.include SessionHelpers, type: :feature
 end
