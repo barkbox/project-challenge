@@ -5,7 +5,7 @@ describe 'Dog resource', type: :feature do
     visit new_dog_path
     fill_in 'Name', with: 'Speck'
     fill_in 'Description', with: 'Just a dog'
-    attach_file 'Image', 'spec/fixtures/images/speck.jpg'
+    attach_file 'Images', 'spec/fixtures/images/speck.jpg', multiple: true
     click_button 'Create Dog'
     expect(Dog.count).to eq(1)
   end
