@@ -1,0 +1,11 @@
+<small><%= dog.get_likes.size %></small>
+<small> Likes </small>
+<% if can_like %>
+<span>
+  <% if current_user.voted_up_on? dog %>
+    <%= link_to 'Unlike', dislike_dog_path(dog), method: :put, class: 'btn btn-primary'%>
+  <% else %>
+    <%= link_to 'Like', like_dog_path(dog), method: :put, class: 'btn btn-primary' %>
+  <% end %>
+</span>
+<% end %>

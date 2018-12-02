@@ -1,0 +1,28 @@
+<div id="dog-carousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <% dog.images.each_with_index do |image, counter| %>
+      <li data-target="#dog-carousel" data-slide-to="<%= counter %>" class="<%= counter == 0 ? 'active' : '' %>"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <% dog.images.each_with_index do |image, counter| %>
+    <div class="<%= counter == 0 ? 'item active' : 'item' %>">
+        <%= image_tag url_for(image), alt: "Photo of #{dog.name}" %>
+      <div class="container">
+        <div class="carousel-caption">
+            <p><%= dog.description %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <a class="left carousel-control" href="#dog-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#dog-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

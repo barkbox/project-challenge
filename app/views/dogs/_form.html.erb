@@ -1,11 +1,11 @@
-<%= simple_form_for @dog do |f| %>
+<%= simple_form_for @dog, defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } } do |f|%>
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
-  <%= f.input :image, as: :file %>
+  <%= f.input :image, as: :file, :input_html => { :multiple => true } %>
 
   <% if @dog.images.any? %>
-    <%= image_tag @dog.images.first %>
+    <%= render partial: 'dog_carousel', locals: { dog: @dog } %>
   <% end %>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, class: 'btn btn-lg btn-primary btn-block' %>
 <% end %>

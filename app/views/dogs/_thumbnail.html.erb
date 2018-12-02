@@ -1,6 +1,22 @@
-<a href="<%= url_for(dog) %>">
-  <article>
-    <h2 class="dog-name"><%= dog.name %></h2>
-    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
+<% if dog_counter > 0 && dog_counter % 2 == 0 %>
+  <article class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+    <h2 class="dog-name">
+      Collar Ad 
+      <button class="btn btn-primary"> Purchase ($29) </button>
+    </h2>
+    <%= image_tag "ad.jpg", class: "dog-photo" %>
   </article>
-</a>
+<% end %>
+
+<article class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+  <h2 class="dog-name">
+    <a href="<%= url_for(dog) %>">
+      <%= dog.name %>
+    </a>
+    <!-- Attempted to use helper is_owned_by_current but dog was being passed in as nil, need to familiarize myself with ruby more -->
+    <%= render partial: 'dog_like', locals: {dog: dog, can_like: current_user ? dog.user_id != current_user.id : false } %>
+  </h2>
+  <a href="<%= url_for(dog) %>">
+    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
+  </a>
+</article>

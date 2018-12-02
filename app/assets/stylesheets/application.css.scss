@@ -14,8 +14,7 @@
  *= require_self
  */
 
-header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ @import "styles/dogs.scss"
