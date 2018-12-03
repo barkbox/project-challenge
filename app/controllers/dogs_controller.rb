@@ -4,7 +4,11 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    page = 0
+    if (params['page'])
+      page = params['page'].to_i - 1
+    end
+    @dogs = Dog.limit(5).offset(page * 5)
   end
 
   # GET /dogs/1
