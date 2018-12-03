@@ -9,6 +9,7 @@ class DogsController < ApplicationController
       page = params['page'].to_i - 1
     end
     @dogs = Dog.limit(5).offset(page * 5)
+    @ad_url = ActionController::Base.helpers.asset_url('ad.jpg')
   end
 
   # GET /dogs/1

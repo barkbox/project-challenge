@@ -1,6 +1,94 @@
-<% @dogs.each_with_index do |dog, index| %>
+<div id="root"></div>
+
+<script type="text/babel">
+const adUrl = '<%= asset_url "ad.jpg" %>';
+const {
+  Avatar,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
+  Link,
+  Typography,
+  withStyles,
+} = window['material-ui'];
+
+const DogCard = ({ dog }) => (
+  <Card>
+    <CardActionArea component="a" href={`/dogs/${dog.id}`}>
+      <CardMedia
+        component="img"
+        image={dog.images[0]}
+        alt={dog.name}
+        title={dog.name} />
+      <CardContent>
+        <Typography variant="h4">{dog.name}</Typography>
+      </CardContent>
+    </CardActionArea>
+  </Card>
+);
+
+const AdCard = ({ imageUrl }) => (
+  <Card>
+    <CardActionArea component="a" href="#">
+      <CardMedia
+        component="img"
+        image={imageUrl}
+        alt="Ad"
+        title="Ad" />
+      <CardContent>
+        <Typography variant="h4">Ad text here</Typography>
+      </CardContent>
+    </CardActionArea>
+  </Card>
+)
+
+class Index extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dogs: [],
+      page: 1,
+    }
+  }
+
+  componentDidMount() {
+    fetch(`/dogs.json/?page=${this.state.page}`)
+      .then((response) => response.json())
+      .then((dogs) => {
+        this.setState({ dogs });
+      });
+  }
+
+  render() {
+    const { dogs } = this.state;
+
+    return (
+      <Grid container spacing={40}>
+        {dogs.map((dog, index) => (
+          <React.Fragment key={dog.id}>
+            <Grid item xs={12} sm={6} md={4}>
+              <DogCard dog={dog} />
+            </Grid>
+            {(index % 2) == true && (
+              <Grid item xs={12} sm={6} md={4}>
+                <AdCard imageUrl={adUrl} />
+              </Grid>
+            )}
+          </React.Fragment>
+        ))}
+      </Grid>
+    )
+  }
+}
+
+ReactDOM.render(<Index />, document.getElementById('root'));
+</script>
+
+<!-- <% @dogs.each_with_index do |dog, index| %>
   <%= render partial: 'thumbnail', locals: { dog: dog } %>
   <% if index.odd? %>
     <%= image_tag "ad.jpg", class: "ad", alt: "Ad" %>
   <% end %>
-<% end %>
+<% end %> -->
