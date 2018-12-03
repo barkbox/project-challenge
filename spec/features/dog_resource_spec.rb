@@ -11,7 +11,16 @@ describe 'Dog resource', type: :feature do
   end
 
   it 'can edit a dog profile' do
+    visit new_user_registration_path
+    fill_in 'Email', with: 'test@bark.co'
+    fill_in 'Password', with: '123456'
+    fill_in 'Password confirmation', with: '123456'
+    click_button 'Sign up'
+
     dog = create(:dog)
+    dog.user_id = 1
+    dog.save
+
     visit edit_dog_path(dog)
     fill_in 'Name', with: 'Speck'
     click_button 'Update Dog'

@@ -19,12 +19,13 @@ const DogCard = ({ name, action, imageUrl }) => (
   <Card>
     <CardActionArea component="a" href={action}>
       <CardMedia
+        className="dog-photo"
         component="img"
         image={imageUrl}
         alt={name}
         title={name} />
       <CardContent>
-        <Typography variant="h4">{name}</Typography>
+        <Typography className="dog-name" variant="h4">{name}</Typography>
       </CardContent>
     </CardActionArea>
   </Card>
