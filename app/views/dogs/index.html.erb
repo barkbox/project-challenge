@@ -1,1 +1,6 @@
-<%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
+<% @dogs.each_with_index do |dog, index| %>
+  <%= render partial: 'thumbnail', locals: { dog: dog } %>
+  <% if index.odd? %>
+    <%= image_tag "ad.jpg", class: "ad", alt: "Ad" %>
+  <% end %>
+<% end %>
