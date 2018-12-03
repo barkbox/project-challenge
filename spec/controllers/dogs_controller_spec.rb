@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe DogsController, type: :controller do
   describe '#index' do
+    before(:each) do
+      user = User.new({ id: 1, email: "test@bark.co", password: "123456" })
+      user.save
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+
     it 'displays recent dogs' do
       2.times { create(:dog) }
       get :index
@@ -21,11 +27,14 @@ RSpec.describe DogsController, type: :controller do
     end
 
     it 'saves the user_id when created' do
-      user = User.new({ id: 1, email: "test@bark.co", password: "123456" })
-      user.save
-      allow(controller).to receive(:current_user).and_return(user)
       get :create, params: { dog: { name: 'Doggo' } }
       expect(assigns(:dog).user_id).to eq(1)
+    end
+
+    it 'redirects to 404 if attempting to edit unowned dog' do
+      create(:dog)
+      get :edit, params: { id: 1 }
+      response.should redirect_to "/404"
     end
   end
 end

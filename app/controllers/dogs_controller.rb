@@ -23,6 +23,9 @@ class DogsController < ApplicationController
 
   # GET /dogs/1/edit
   def edit
+    if (@dog.user_id != current_user.id)
+      redirect_to "/404"
+    end
   end
 
   # POST /dogs
