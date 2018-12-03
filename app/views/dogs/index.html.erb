@@ -4,6 +4,7 @@
 const adUrl = '<%= asset_url "ad.jpg" %>';
 const {
   Avatar,
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -54,11 +55,36 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/dogs.json/?page=${this.state.page}`)
+    this.fetchDogs(this.state.page);
+  }
+
+  fetchDogs = (page) => {
+    fetch(`/dogs.json/?page=${page}`)
       .then((response) => response.json())
       .then((dogs) => {
         this.setState({ dogs });
       });
+  }
+
+  paginate = (newPage) => {
+    this.fetchDogs(newPage);
+    this.setState({
+      page: newPage
+    });
+  }
+
+  next = () => {
+    const { page } = this.state;
+
+    this.paginate(page + 1);
+  }
+
+  previous = () => {
+    const { page } = this.state;
+
+    if (page > 1) {
+      this.paginate(page - 1)
+    }
   }
 
   render() {
@@ -78,6 +104,10 @@ class Index extends React.Component {
             )}
           </React.Fragment>
         ))}
+        <Grid item md={12}>
+          <Button onClick={this.previous}>Prev</Button>
+          <Button onClick={this.next}>Next</Button>
+        </Grid>
       </Grid>
     )
   }
