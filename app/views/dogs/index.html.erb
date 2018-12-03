@@ -15,35 +15,20 @@ const {
   withStyles,
 } = window['material-ui'];
 
-const DogCard = ({ dog }) => (
+const DogCard = ({ name, action, imageUrl }) => (
   <Card>
-    <CardActionArea component="a" href={`/dogs/${dog.id}`}>
+    <CardActionArea component="a" href={action}>
       <CardMedia
         component="img"
-        image={dog.images[0]}
-        alt={dog.name}
-        title={dog.name} />
+        image={imageUrl}
+        alt={name}
+        title={name} />
       <CardContent>
-        <Typography variant="h4">{dog.name}</Typography>
+        <Typography variant="h4">{name}</Typography>
       </CardContent>
     </CardActionArea>
   </Card>
 );
-
-const AdCard = ({ imageUrl }) => (
-  <Card>
-    <CardActionArea component="a" href="#">
-      <CardMedia
-        component="img"
-        image={imageUrl}
-        alt="Ad"
-        title="Ad" />
-      <CardContent>
-        <Typography variant="h4">Ad text here</Typography>
-      </CardContent>
-    </CardActionArea>
-  </Card>
-)
 
 class Index extends React.Component {
   constructor(props) {
@@ -75,12 +60,14 @@ class Index extends React.Component {
 
   next = () => {
     const { page } = this.state;
+    console.log('page', page);
 
     this.paginate(page + 1);
   }
 
   previous = () => {
     const { page } = this.state;
+    console.log('page', page);
 
     if (page > 1) {
       this.paginate(page - 1)
@@ -91,22 +78,34 @@ class Index extends React.Component {
     const { dogs } = this.state;
 
     return (
-      <Grid container spacing={40}>
+      <Grid container spacing={40} justify="center" alignItems="center">
         {dogs.map((dog, index) => (
           <React.Fragment key={dog.id}>
             <Grid item xs={12} sm={6} md={4}>
-              <DogCard dog={dog} />
+              <DogCard
+                name={dog.name}
+                action={`/dogs/${dog.id}`}
+                imageUrl={dog.images[0]} />
             </Grid>
             {(index % 2) == true && (
               <Grid item xs={12} sm={6} md={4}>
-                <AdCard imageUrl={adUrl} />
+                <DogCard
+                  name="Ad"
+                  action="#"
+                  imageUrl={adUrl} />
               </Grid>
             )}
           </React.Fragment>
         ))}
         <Grid item md={12}>
-          <Button onClick={this.previous}>Prev</Button>
-          <Button onClick={this.next}>Next</Button>
+          <Grid container spacing={40} justify="center">
+            <Grid item>
+              <Button variant="contained" size="large" onClick={this.previous}>Prev</Button>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" size="large" onClick={this.next}>Next</Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )
