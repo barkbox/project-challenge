@@ -45,9 +45,11 @@ class DogsController < ApplicationController
   def update
     respond_to do |format|
 
-      unless @dog.owner.id == current_user.id
-        format.html { render :edit }
-        format.json { render json: @dog.errors, status: :unprocessable_entity }
+      if @dog.owner
+        unless @dog.owner.id == current_user.id
+          format.html { render :edit }
+          format.json { render json: @dog.errors, status: :unprocessable_entity }
+        end
       end
 
       if @dog.update(dog_params)
