@@ -1,1 +1,11 @@
-<%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
+<!-- <%= render partial: 'thumbnail', collection: @dogs, as: :dog %> -->
+
+<% count = 0 %>
+<% @dogs.each do |dog| %>
+  <%= render partial: 'thumbnail', object: dog, as: 'dog' %>
+  <% count += 1 %>
+  <% if count == 2 %>
+    <img src="../../assets/ad.jpg">
+    <% count = 0 %>
+  <% end %> 
+<% end %>
