@@ -1,11 +1,17 @@
 <!-- <%= render partial: 'thumbnail', collection: @dogs, as: :dog %> -->
+<%= will_paginate @dogs %>
 
 <% count = 0 %>
 <% @dogs.each do |dog| %>
   <%= render partial: 'thumbnail', object: dog, as: 'dog' %>
   <% count += 1 %>
   <% if count == 2 %>
+  <div class="ad">
+    <h3>You may be interested in:</h2>
     <img src="../../assets/ad.jpg">
+  </div>
     <% count = 0 %>
   <% end %> 
 <% end %>
+
+<%= will_paginate @dogs %>
