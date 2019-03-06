@@ -6,4 +6,6 @@ class Dog < ApplicationRecord
   foreign_key: :user_id,
   optional: true
 
+  has_many :likes
+
 end

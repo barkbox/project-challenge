@@ -1,5 +1,21 @@
 <section>
   <h2><%= @dog.name %></h2>
+  <% if @like %>
+      <form action="<%= dog_like_url(@dog) %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Unlike this Pup (you monster...) ">
+      </form> 
+  <% else %>
+      <form action="<%= dog_likes_url(@dog) %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> 
+      <input type="submit" value="Like this Pup!"> 
+      </form>
+  <% end %>
+
+
+
+  <p><%= @dog.name %> has <%= @dog.likes.count %> likes! BARK!</p>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
