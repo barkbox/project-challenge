@@ -38,7 +38,6 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
-    @like = Like.find_by(user_id: current_user.id, dog_id: params[:id])
   end
 
   # GET /dogs/new

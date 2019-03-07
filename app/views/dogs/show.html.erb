@@ -1,17 +1,16 @@
 <section>
   <h2 class="dog-name"><%= @dog.name %></h2>
-  <% if @like %>
-      <form action="<%= dog_like_url(@dog) %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="delete">
-      <input class="unlike-button" type="submit" value="Unlike this Pup (you monster...) ">
-      </form> 
-  <% else %>
-      <form action="<%= dog_likes_url(@dog) %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> 
-      <input class="like-button"type="submit" value="Like this Pup!">
-      </form>
-  <% end %>
+
+    <form action="<%= dog_likes_url(@dog) %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> 
+    <input class="like-button"type="submit" value="Like this Pup!">
+    </form>
+
+    <form action="<%= dog_like_url(@dog) %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input class="unlike-button" type="submit" value="Unlike this Pup (you monster...) ">
+    </form> 
 
 
 
