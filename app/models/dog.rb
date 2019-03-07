@@ -8,4 +8,5 @@ class Dog < ApplicationRecord
 
   has_many :likes
 
+
 end

@@ -4,7 +4,10 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.paginate(:page => params[:page], :per_page => 5)
+    @dogs = Dog.left_joins(:likes)
+    .group(:id)
+    .order('COUNT(likes.id) DESC')
+    .paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /dogs/1
@@ -47,10 +50,11 @@ class DogsController < ApplicationController
     respond_to do |format|
 
       if @dog.owner
-        unless @dog.owner.id == current_user.id
-          format.html { render :edit }
-          format.json { render json: @dog.errors, status: :unprocessable_entity }
+        if @dog.owner.id != current_user.id
+          flash[:notice] = "*You can't EDIT someone else's dog!*"
+          redirect_to @dog
         end
+        return
       end
 
       if @dog.update(dog_params)
@@ -68,6 +72,14 @@ class DogsController < ApplicationController
   # DELETE /dogs/1
   # DELETE /dogs/1.json
   def destroy
+    if @dog.owner
+      if @dog.owner.id != current_user.id
+        flash[:notice] = "*You can't just DELETE someone else's dog!*"
+        redirect_to @dog
+        return
+      end
+    end
+
     @dog.destroy
     respond_to do |format|
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
