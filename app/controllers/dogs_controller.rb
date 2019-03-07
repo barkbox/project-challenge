@@ -1,13 +1,38 @@
+require 'will_paginate/array'
+
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.left_joins(:likes)
-    .group(:id)
-    .order('COUNT(likes.id) DESC')
-    .paginate(:page => params[:page], :per_page => 5)
+    unliked_dogs = []
+    liked_dogs = []
+    liked_ids = Like.where('created_at > ?', 1.hours.ago).pluck(:dog_id)
+    dogs = liked_ids.map { |id| Dog.find(id) }
+    Dog.all.each do |dog|
+      if liked_ids.include?(dog.id)
+        liked_dogs << dog
+      else
+        unliked_dogs << dog
+      end
+    end
+    liked_dogs = dogs.sort_by { |dog| dog.likes.count }.reverse
+    all_dogs = liked_dogs.concat(unliked_dogs)
+    @dogs = all_dogs.paginate(:page => params[:page], :per_page => 5)
+
+    # @dogs = Dog.select('dogs.*, count(likes.id) as likes_count')
+    # .joins('LEFT OUTER JOIN likes on likes.post_id = dogs.id')
+    # .group_by('dogs.id')
+    # .order('likes_count desc')
+    # .where('created_at > ?', 1.hours.ago)
+    # .paginate(:page => params[:page], :per_page => 5)
+
+    # @dogs = Dog.left_joins(:likes)
+    # .group(:id)
+    # .order('COUNT(likes.id) DESC')
+    # .where('created_at > ?', 1.hours.ago)
+    # .paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /dogs/1
