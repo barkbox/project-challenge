@@ -7,7 +7,9 @@
 
   <p><%= @dog.description %></p>
 
-  <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+  <% if current_user.id == @dog.owner_id %>
+    <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+  <% end %>
   <br>
   <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
 </section>

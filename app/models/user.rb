@@ -25,9 +25,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :dogs,
-  primary_key: :id,
-  foreign_key: :owner_id,
-  class_name: 'Dog',
-  dependent: :destroy
+    primary_key: :id,
+    foreign_key: :owner_id,
+    class_name: 'Dog',
+    dependent: :destroy
  
 end
