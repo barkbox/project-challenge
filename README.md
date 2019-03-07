@@ -17,3 +17,15 @@ Run the specs with `rspec`
 Run the server with `rails s`
 
 View the site at http://localhost:3000
+
+
+gem 'will_paginate'
+@dogs = Dog.paginate(page: params[:page])
+<%= will_paginate(@dogs) %>
+
+
+def dog_params
+      params.require(:dog).permit(:name, :description, images: [])
+    end
+
+ <%= f.input :images, as: :file, :input_html => { :multiple => true } %>
