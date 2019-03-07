@@ -64,6 +64,11 @@ padding-bottom: 10px;
   color: black;
 }
 
+.like-button:hover, .unlike-button:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 1px gray
+}
+
 .dog-name {
  font-family: Gaegu;
  font-weight: 500;
