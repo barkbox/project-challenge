@@ -21,5 +21,10 @@ class Dog < ApplicationRecord
     primary_key: :id,
     foreign_key: :owner_id,
     class_name: 'User'
+  
+  has_many :likes,
+    primary_key: :id,
+    foreign_key: :dog_id,
+    class_name: 'Like'
 
 end

@@ -1,5 +1,16 @@
 <section>
   <h2><%= @dog.name %></h2>
+  <h2>Number of Likes: <%= @dog.likes.count %></h2>
+
+  <% if current_user %>
+    <% if @like %>
+      <%= link_to "Unlike", like_url(@like.id), method: :delete %>
+    <% else %>
+      <%= link_to "Like", dog_likes_url(@dog), method: :post %>
+    <% end %>
+  <% end %>
+
+  <br>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
@@ -7,9 +18,9 @@
 
   <p><%= @dog.description %></p>
 
-  <% if current_user.id == @dog.owner_id %>
+  <% if current_user && current_user.id == @dog.owner_id %>
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+    <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
   <br>
-  <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
 </section>

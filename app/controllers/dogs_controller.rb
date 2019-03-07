@@ -1,5 +1,6 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create]
 
   # GET /dogs
   # GET /dogs.json
@@ -10,6 +11,9 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    if current_user
+      @like = Like.where(liker_id: current_user.id).where(dog_id: @dog.id)[0]
+    end
   end
 
   # GET /dogs/new

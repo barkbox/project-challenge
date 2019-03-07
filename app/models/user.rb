@@ -30,4 +30,10 @@ class User < ApplicationRecord
     class_name: 'Dog',
     dependent: :destroy
  
+  has_many :likes,
+    primary_key: :id,
+    foreign_key: :liker_id,
+    class_name: 'Like',
+    dependent: :destroy
+
 end
