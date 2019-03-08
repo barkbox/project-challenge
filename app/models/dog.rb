@@ -15,8 +15,6 @@
 class Dog < ApplicationRecord
   has_many_attached :images
 
-  self.per_page = 5
-
   belongs_to :owner,
     primary_key: :id,
     foreign_key: :owner_id,

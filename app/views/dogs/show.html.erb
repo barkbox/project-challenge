@@ -2,7 +2,7 @@
   <h2><%= @dog.name %></h2>
   <h2>Number of Likes: <%= @dog.likes.count %></h2>
 
-  <% if current_user %>
+  <% if current_user && @dog.owner_id != current_user.id %>
     <% if @like %>
       <%= link_to "Unlike", like_url(@like.id), method: :delete %>
     <% else %>

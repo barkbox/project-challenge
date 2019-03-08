@@ -11,6 +11,8 @@
 
 class Like < ApplicationRecord
 
+  scope :filtered_likes, -> { where('created_at <= ?', 1.hour.ago) }
+
   belongs_to :liker,
     primary_key: :id,
     foreign_key: :liker_id,
