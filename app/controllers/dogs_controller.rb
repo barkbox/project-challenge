@@ -1,3 +1,4 @@
+require "time"
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create]
@@ -5,21 +6,12 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-
-    if params[:sort_params]
-      # @dogs = Dog.paginate(page: params[:page], :per_page => 5)
-      #             .left_outer_joins(:likes)
-      #             .where('likes.created_at < ?', 1.hour.ago)
-      #             .group('likes')
-      #             .order("count(likes.id) desc")
-       @dogs = Dog.paginate(page: params[:page], :per_page => 5)
-                  .left_outer_joins(:likes)
-                  .group('dogs.id')
-                  .order('count(likes.id) DESC')
-                  # .merge(Like.filtered_likes)
-                  # .select('dogs.*')
-                 
-     
+    if params[:sort_params]   
+      subquery = Like.select(:id, :dog_id, :user_id).where(created_at: (Time.now - 1.hour)..Time.now)
+      @dogs = Dog.paginate(page: params[:page], :per_page => 5)
+                  .joins("LEFT JOIN (#{subquery.to_sql}) AS likes ON dogs.id = likes.dog_id")
+                  .group(:id)
+                  .order("count(likes.id) desc")
     else
       @dogs = Dog.paginate(page: params[:page], :per_page => 5)
     end
