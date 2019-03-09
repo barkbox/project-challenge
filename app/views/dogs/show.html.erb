@@ -41,9 +41,17 @@
 </div>
 
 
-  
+  <p class="dog-description"><%= @dog.description %></p>
 
-  <p><%= @dog.description %></p>
+  <div class="thumbnail-container">
+    <div class="thumbnail-grid">
+      <% @dog.images.each do |image| %>     
+        <div class="thumbnail-cell">
+          <%= image_tag url_for(image), class: "thumbnail-image", alt: "Photo of #{@dog.name}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
   <% if current_user && current_user.id == @dog.owner_id %>
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
