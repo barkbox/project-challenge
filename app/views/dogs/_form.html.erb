@@ -1,7 +1,13 @@
-<%= simple_form_for @dog do |f| %>
+<%= simple_form_for(@dog, html: { class: 'pt-6' }) do |f| %>
+  <div class="field">
   <%= f.input :name %>
+  </div>
+  <div class="field">
   <%= f.input :description, as: :text %>
+  </div>
+  <div class="field">
   <%= f.input :images, as: :file, :input_html => { :multiple => true } %>
+  </div>
 
   <% if @dog.images.any? %>
     <%= image_tag @dog.images.first %>
