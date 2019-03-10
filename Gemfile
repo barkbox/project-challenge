@@ -41,6 +41,7 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'autoprefixer-rails'
+gem 'sprockets-rails'
 
 gem 'annotate'
 # Reduces boot times through caching; required in config/boot.rb
