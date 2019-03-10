@@ -32,12 +32,14 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
 gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
 gem 'autoprefixer-rails'
 
 gem 'annotate'

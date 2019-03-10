@@ -29,6 +29,7 @@ header {
 .item {
   height: 300px;
 }
+
 .item > img {
   object-fit: cover;
   width: 300px;
@@ -40,4 +41,12 @@ header {
   height: 300px;
   width: 300px;
   object-fit: cover;
+}
+
+.pt-8 {
+  padding-top: 8rem !important;
+}
+
+.text-large {
+  font-size: 150%;
 }

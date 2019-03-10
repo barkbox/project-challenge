@@ -1,7 +1,7 @@
-
-
-<div class="container" id="dogs">
-<%= link_to "Sort By Likes", :controller => "dogs", :action => "index", :sort_params => true %>
+<div class="container text-center">
+  <div class="text-right mb-3 text-dark text-large">
+    <%= link_to "Sort By Likes", :controller => "dogs", :action => "index", :sort_params => true  %>
+  </div>
   <div class="row">
     <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
  </div>
