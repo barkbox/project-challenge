@@ -1,17 +1,22 @@
-<%= simple_form_for(@dog, html: { class: 'pt-6' }) do |f| %>
-  <div class="field">
-  <%= f.input :name %>
-  </div>
-  <div class="field">
-  <%= f.input :description, as: :text %>
-  </div>
-  <div class="field">
-  <%= f.input :images, as: :file, :input_html => { :multiple => true } %>
-  </div>
 
-  <% if @dog.images.any? %>
-    <%= image_tag @dog.images.first %>
+<div class="container">
+  <%= simple_form_for(@dog, html: { class: 'pt-6' }) do |f| %>
+    <div class="form-group">
+    <%= f.input :name, input_html: { class: 'form-control', required: true } %>
+    </div>
+    <div class="form-group">
+    <%= f.input :description, as: :text, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+    <%= f.input :images, as: :file, :input_html => { :multiple => true } %>
+    </div>
+
+    <% if @dog.images.any? %>
+      <%= image_tag @dog.images.first %>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.button :submit, :class => 'btn btn-primary'  %>
+    </div>
   <% end %>
-
-  <%= f.button :submit %>
-<% end %>
+</div>
