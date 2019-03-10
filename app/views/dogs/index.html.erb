@@ -1,6 +1,9 @@
 <%= link_to "Sort By Likes", :controller => "dogs", :action => "index", :sort_params => true %>
 
-<%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
-
+<div class="container">
+  <div class="row">
+    <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
+ </div>
+</div>
 
 <%= will_paginate(@dogs) %>

@@ -1,6 +1,5 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-1">
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <a href="<%= url_for(dog) %>">
         <article>
           <h2 class="dog-name"><%= dog.name %></h2>
@@ -8,12 +7,13 @@
         </article>
       </a>
     </div>
-  </div>
-</div>
+ 
 
 <% if dog_counter % 2 == 1 %>
-  <article>
-    <h2 class="ad-description">Collar for sale!</h2>
-    <%= image_tag image_url('ad.jpg'), class: "ad-photo", alt: "Photo of ad" %>
-  </article>
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <article>
+      <h2 class="ad-description">Collar for sale!</h2>
+      <%= image_tag image_url('ad.jpg'), class: "ad-photo", alt: "Photo of ad" %>
+    </article>
+  </div>
 <% end %>
