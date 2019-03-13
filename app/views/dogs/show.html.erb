@@ -1,11 +1,26 @@
 <section>
-  <h2><%= @dog.name %></h2>
+  <h2 class="dog-name"><%= @dog.name %></h2>
+
+    <form action="<%= dog_likes_url(@dog) %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> 
+    <input class="like-button"type="submit" value="Like this Pup!">
+    </form>
+
+    <form action="<%= dog_like_url(@dog) %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input class="unlike-button" type="submit" value="Unlike this Pup (you monster...) ">
+    </form> 
+
+
+
+  <p class="like-count"><%= @dog.name %> has <%= @dog.likes.count %> likes! BARK!</p>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
   <% end %>
 
-  <p><%= @dog.description %></p>
+  <p class="description"><%= @dog.description %></p>
 
   <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
   <br>
