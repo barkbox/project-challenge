@@ -10,52 +10,42 @@ dogs = [
   {
     name: 'Bowie',
     description: 'Bowie dances when he walks',
-    user_id: 1,
   },
   {
     name: 'Brownie',
     description: 'Brownie only sits pretty',
-    user_id: 1,
   },
   {
     name: 'Jax',
     description: '',
-    user_id: 1,
   },
   {
     name: 'Jiro',
     description: 'Jiro takes a long time to destroy his toys',
-    user_id: 1,
   },
   {
     name: 'Pete',
     description: 'Pete has a best friend named Lua',
-    user_id: 1,
   },
   {
     name: 'Bijou',
     description: 'Bijou is the fluffiest of them all',
-    user_id: 1,
   },
     {
     name: 'Britta',
     description: 'Britta has two different colored eyes',
-    user_id: 1,
   },
   {
     name: 'Noodle',
     description: 'Noodle is an Instagram celebrity',
-    user_id: 1,
   },
   {
     name: 'Stella',
     description: 'Stella loves to dig',
-    user_id: 1,
   },
   {
     name: 'Tonks',
     description: 'Tonks loves to run',
-    user_id: 1,
   },
 ]
 
