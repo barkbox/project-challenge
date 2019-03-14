@@ -4,6 +4,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
+    puts "checking if the user is signed in", user_signed_in?
     @dogs = Dog.all
   end
 
@@ -19,6 +20,10 @@ class DogsController < ApplicationController
 
   # GET /dogs/1/edit
   def edit
+    puts '================================================'
+    puts "checking if the user is signed in", user_signed_in?
+    puts '================================================'
+    # @dog = Dog.find(params[:id])
   end
 
   # POST /dogs
