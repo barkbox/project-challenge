@@ -42,17 +42,13 @@
           </div>
         </nav>
       </header>
-
-      <div class="d-flex flex-row justify-content-sm-center align-items-center">
-        <div id="main">
-          <div class="notifications">
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
-          </div>
-          <%= yield %>
+      <div id="main">
+        <div class="notifications">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
         </div>
+        <%= yield %>
       </div>
-
       <div class="footer"></div>
     </div>
 
