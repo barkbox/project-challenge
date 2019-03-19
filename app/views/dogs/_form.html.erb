@@ -1,5 +1,3 @@
-<%= javascript_include_tag 'submit_button_disabled.js' %>
-
 <div class="container">
   <%= simple_form_for(@dog, html: { name:'myForm', class: 'pt-6' }) do |f| %>
     <div class="form-group">
@@ -9,7 +7,7 @@
     <%= f.input :description, as: :text, input_html: { class: 'form-control' } %>
     </div>
     <div class="form-group">
-    <%= f.input :images, as: :file, required: true, :input_html => { :multiple => true } %>
+    <%= f.input :images, as: :file, :input_html => { :multiple => true } %>
     </div>
 
     <% if @dog.images.any? %>
@@ -17,7 +15,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.button :submit, :id => 'submit_button', :class => 'btn btn-primary', :disabled => true %>
+      <%= f.button :submit, :id => 'submit_button', :class => 'btn btn-primary' %>
     </div>
   <% end %>
 </div>

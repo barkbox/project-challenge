@@ -16,7 +16,7 @@ class Dog < ApplicationRecord
 
   has_many_attached :images
 
-  belongs_to :owner,
+  belongs_to :owner, optional: true,
     primary_key: :id,
     foreign_key: :owner_id,
     class_name: 'User'
