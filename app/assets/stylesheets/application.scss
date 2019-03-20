@@ -13,9 +13,52 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 header {
   align-items: center;
   display: flex;
   justify-content: space-between;
+}
+
+.dog-description {
+  text-align: center;
+}
+
+.item {
+  height: 450px;
+}
+
+.item-image, .item > img {
+  object-fit: cover;
+  width: 450px;
+  height: 450px;
+  margin: 0 auto;
+}
+
+.dog-photo, .ad-photo {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.pt-6 {
+  padding-top: 5rem !important;
+}
+
+.pt-8 {
+  padding-top: 8rem !important;
+}
+
+.text-large {
+  font-size: 150%;
+}
+
+.form-title {
+  margin: auto;
+}
+
+.carousel-indicators > li {
+  display: none;
 }

@@ -1,15 +1,28 @@
+require "time"
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create]
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    if params[:sort_params]   
+      subquery = Like.select(:id, :dog_id, :user_id).where(created_at: (Time.now - 1.hour)..Time.now)
+      @dogs = Dog.paginate(page: params[:page], :per_page => 5)
+                  .joins("LEFT JOIN (#{subquery.to_sql}) AS likes ON dogs.id = likes.dog_id")
+                  .group(:id)
+                  .order("count(likes.id) desc")
+    else
+      @dogs = Dog.paginate(page: params[:page], :per_page => 5)
+    end
   end
 
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    if current_user
+      @like = Like.where(liker_id: current_user.id).where(dog_id: @dog.id)[0]
+    end
   end
 
   # GET /dogs/new
@@ -25,6 +38,7 @@ class DogsController < ApplicationController
   # POST /dogs.json
   def create
     @dog = Dog.new(dog_params)
+    @dog.owner_id = current_user.id
 
     respond_to do |format|
       if @dog.save
@@ -73,6 +87,6 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :description, :images)
+      params.require(:dog).permit(:name, :description, images: [])
     end
 end

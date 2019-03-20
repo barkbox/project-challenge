@@ -33,9 +33,17 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'autoprefixer-rails'
+gem 'sprockets-rails'
 
+gem 'annotate'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -45,6 +53,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
   gem 'capybara'
+  gem 'launchy'
   gem 'pry'
   gem 'rails-controller-testing'
 end
