@@ -5,9 +5,8 @@
   <div class="row">
     <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
  </div>
-<div id="page_links">
-  <%= will_paginate @dogs, renderer: BootstrapPagination::Rails %>
-</div>
-
+  <div id="page_links">
+    <%= will_paginate @dogs, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>
 

@@ -1,7 +1,6 @@
-<section class="pt-3">
-  <h2 class="text-center"><%= @dog.name %></h2>
-  <br>
-
+<h2 class="text-center"><%= @dog.name %></h2>
+<% if @dog.images.length > 1 %>
+  <section class="pt-3">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -29,8 +28,15 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+</section>
+<% else %>
+  <% @dog.images.each do |image| %>
+    <%= image_tag url_for(image), class: "item-image mx-auto d-block", alt: "Photo of #{@dog.name}" %>
+  <% end %>
+<% end %>
 
-  <p class="dog-description"><%= @dog.description %></p>
+<section>
+  <p class="dog-description text-large"><%= @dog.description %></p>
   <h2 class="text-center">Likes: <%= @dog.likes.count %></h2>
 
   <div class="text-center text-large">
