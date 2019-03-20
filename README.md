@@ -257,7 +257,7 @@ app/view/index.html.erb
   });
 </script>
 ```
-Created an index.js.erb file to replace the contents in dogs with paged table data such that clicking on a page triggers an ajax request. <br />
+Created a javascript view to replace the contents in dogs with paged table data such that clicking on a page triggers an ajax request. <br />
 <br />
 app/views/index.js.erb 
 ```javascript
