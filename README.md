@@ -149,6 +149,7 @@ app/controllers/dogs_controller.rb
 
 ## Display the ad.jpg image after every 2 dogs in the index page
 
+app/views/_thumbnail.html.erb
 ```ruby
 <% if dog_counter % 2 == 1 %>
   <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
@@ -247,8 +248,6 @@ The use of utility classes with Bootstrap can be seen throughout the application
 
 ## Refactor the homepage from its current state as a server-rendered page to a client-rendered page, where you request data from `/dogs.json` and display data from the response.
 
-Adds clicking functionality that triggers an ajax request when page number is clicked. <br />
-<br />
 app/view/index.html.erb 
 ```html
 <script>
@@ -257,7 +256,7 @@ app/view/index.html.erb
   });
 </script>
 ```
-Created a javascript view to replace the contents in dogs with paged table data such that clicking on a page triggers an ajax request. <br />
+Created a javascript view to to be executed when the ajax request is returned. The following code replaces the contents of the dogs div with the dogs partial. <br />
 <br />
 app/views/index.js.erb 
 ```javascript
