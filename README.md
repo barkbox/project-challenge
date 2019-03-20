@@ -226,6 +226,7 @@ app/views/show.html.erb
 
 ## Use flexbox, CSS grids, or a grid framework to display the homepage's dog profile thumbnails in a responsive grid layout
 
+app/views/_dogs.html.erb
 ```ruby
 <div class="container text-center">
   <div class="text-right mb-3 text-dark text-large">
@@ -246,8 +247,9 @@ The use of utility classes with Bootstrap can be seen throughout the application
 
 ## Refactor the homepage from its current state as a server-rendered page to a client-rendered page, where you request data from `/dogs.json` and display data from the response.
 
-app/view/index.html.erb
-Adds clicking functionality that triggers an ajax request when page number is clicked.
+Adds clicking functionality that triggers an ajax request when page number is clicked. <br />
+<br />
+app/view/index.html.erb 
 ```html
 <script>
   $(function(){
@@ -255,9 +257,9 @@ Adds clicking functionality that triggers an ajax request when page number is cl
   });
 </script>
 ```
-
-app/views/index.js.erb
-Created an index.js.erb file to replace the contents in dogs with paged table data such that clicking on a page triggers an ajax request.
+Created an index.js.erb file to replace the contents in dogs with paged table data such that clicking on a page triggers an ajax request. <br />
+<br />
+app/views/index.js.erb 
 ```javascript
 $("#dogs").html('<%=  escape_javascript(render 'dogs') %>');
 $('.pagination a').attr('data-remote', 'true');
