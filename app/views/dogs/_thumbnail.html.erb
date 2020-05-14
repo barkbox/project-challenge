@@ -2,6 +2,8 @@
   <article>
     <h2 class="dog-name"><%= dog.name %></h2>
     <p>Recent Likes:<%= dog.likes_in_last_hour %></p>
-    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
+    <% if dog.images.any? %>
+      <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}", size: 100 %>
+    <% end %>
   </article>
 </a>

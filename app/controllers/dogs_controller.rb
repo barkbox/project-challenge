@@ -54,7 +54,11 @@ class DogsController < ApplicationController
   def update
     respond_to do |format|
       if @dog.update(dog_params)
-        @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
+        if params[:dog][:images]
+          params[:dog][:images].each do |image|
+            @dog.images.attach(image.last) if image.present?
+          end
+        end
 
         format.html { redirect_to @dog, notice: 'Dog was successfully updated.' }
         format.json { render :show, status: :ok, location: @dog }
