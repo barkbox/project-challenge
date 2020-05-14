@@ -6,8 +6,11 @@
   <% end %>
 
   <p><%= @dog.description %></p>
-
-  <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
-  <br>
-  <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% if current_user && @dog.user.id == current_user.id %>
+    <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+    <br>
+    <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% elsif current_user %>
+    <%= button_to 'Like', dog_likes_path(@dog), method: :post %>
+  <% end %>
 </section>
