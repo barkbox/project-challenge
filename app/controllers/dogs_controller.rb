@@ -5,7 +5,12 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all.page params[:page]
+    if params[:sort_by_likes]
+      dogs_arr = Dog.all.sort_by {|d| d.likes_in_last_hour }
+      @dogs = Kaminari.paginate_array(dogs_arr).page(params[:page]).per(5)
+    else
+      @dogs = Dog.all.page params[:page]
+    end
   end
 
   # GET /dogs/1
