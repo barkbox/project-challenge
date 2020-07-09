@@ -1,11 +1,17 @@
 require 'rails_helper'
 
 describe 'Dog resource', type: :feature do
+  let(:user) { create(:user) }
+
+  before do
+    login_as user
+  end
+
   it 'can create a profile' do
     visit new_dog_path
     fill_in 'Name', with: 'Speck'
     fill_in 'Description', with: 'Just a dog'
-    attach_file 'Image', 'spec/fixtures/images/speck.jpg'
+    attach_file 'Images', 'spec/fixtures/images/speck.jpg'
     click_button 'Create Dog'
     expect(Dog.count).to eq(1)
   end
