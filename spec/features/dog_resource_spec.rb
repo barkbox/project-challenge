@@ -24,7 +24,7 @@ describe 'Dog resource', type: :feature do
     expect(dog.reload.name).to eq('Speck')
   end
 
-  it 'can delete a dog profile' do
+  it 'can delete a dog profile if owner' do
     dog = create(:dog, owner: user)
     visit dog_path(dog)
     click_link "Delete #{dog.name}'s Profile"
