@@ -4,12 +4,14 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @dogs = Dog.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    @number_of_likes = Like.where(dog_id: @dog.id).count
+    @user_liked = Like.where(dog_id: @dog.id, user_id: current_user.id).any?
   end
 
   # GET /dogs/new
@@ -19,12 +21,16 @@ class DogsController < ApplicationController
 
   # GET /dogs/1/edit
   def edit
+    if @dog&.owner != current_user
+      redirect_to @dog, notice: 'Dog can only be edited by its owner.'
+    end
   end
 
   # POST /dogs
   # POST /dogs.json
   def create
     @dog = Dog.new(dog_params)
+    @dog.owner = current_user
 
     respond_to do |format|
       if @dog.save
@@ -73,6 +79,6 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :description, :images)
+      params.require(:dog).permit(:name, :description, :images => [])
     end
 end

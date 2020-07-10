@@ -1,7 +1,10 @@
 <%= simple_form_for @dog do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
-  <%= f.input :image, as: :file %>
+  <%= f.label :images %> 
+  <%= f.file_field :images, as: :file, multiple: true, accept:'image/*' %>
+
+  <br/>
 
   <% if @dog.images.any? %>
     <%= image_tag @dog.images.first %>

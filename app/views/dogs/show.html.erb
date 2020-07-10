@@ -1,13 +1,29 @@
 <section>
   <h2><%= @dog.name %></h2>
 
+  <% if current_user && current_user != @dog.owner %>
+    <%= simple_form_for Like.new, remote: true do |f| %>
+      <%= f.hidden_field :dog_id, value: @dog.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit 'Like', id: 'like-button', disabled: @user_liked %>
+    <% end %>
+  <% end %>
+
+  <p>Number of Likes: <span id="number-of-likes"><%= @number_of_likes %></span></p>
+
+  <br>
+
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
   <% end %>
 
   <p><%= @dog.description %></p>
+  <p>Owner: <%= @dog.owner&.email || "None" %></p>
 
-  <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
-  <br>
-  <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% if current_user && current_user === @dog.owner %>
+    <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
+
+    <br>
+    <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </section>

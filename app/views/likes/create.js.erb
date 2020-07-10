@@ -1,0 +1,6 @@
+section = document.getElementById("number-of-likes")
+section.innerHTML = '<%= @number_of_likes %>'
+
+button = document.getElementById("like-button")
+button.setAttribute('disabled', true)
+button.removeAttribute('data-disable-with')

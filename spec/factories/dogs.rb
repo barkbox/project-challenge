@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :dog do
+    owner { |_| create(:user) }
     sequence :name do |n|
       "Good Pup #{n}"
     end
