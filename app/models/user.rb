@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :dogs
+
+  def owner_of?(dog)
+    id == dog.user_id
+  end
 end
