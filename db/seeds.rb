@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Dog.destroy_all
+User.destroy_all
+
 dogs = [
   {
     name: 'Bowie',
@@ -49,8 +52,10 @@ dogs = [
   },
 ]
 
+5.times { FactoryBot.create(:user) }
+
 dogs.each do |dog|
-  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description])
+  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description], user: User.all.sample)
   directory_name = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}", "*")
 
   Dir.glob(directory_name).each do |filename|

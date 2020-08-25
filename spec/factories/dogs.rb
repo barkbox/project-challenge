@@ -9,5 +9,7 @@ FactoryBot.define do
         filename: 'bowie_toys.jpeg',
         content_type: 'image/jpeg')
     end
+
+    user { create :user }
   end
 end
