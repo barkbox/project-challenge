@@ -7,6 +7,10 @@
 
   <p><%= @dog.description %></p>
 
+  <div id="dog_<%= @dog.id %>_likes">
+    <%= render "dogs/likes", dog: @dog %>
+  </div>
+
   <% if can_edit?(@dog) %>
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
     <br>

@@ -1,0 +1,9 @@
+<% if can_like?(dog) %>
+  <% if current_user.likes?(dog) %>
+    <%= link_to "Unlike", dog_like_path(dog), method: :delete, remote: true %>
+  <% else %>
+    <%= link_to "Like", dog_likes_path(dog), method: :post, remote: true %>
+  <% end %>
+<% end %>
+
+<p>Likes: <%= dog.likes.count %></p>

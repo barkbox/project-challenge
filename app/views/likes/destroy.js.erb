@@ -1,0 +1,3 @@
+document
+.getElementById("dog_<%= @dog.id %>_likes")
+.innerHTML = "<%= j render partial: "dogs/likes", locals: { dog: @dog } %>";

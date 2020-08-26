@@ -16,4 +16,18 @@ describe User do
       it { is_expected.to be false }
     end
   end
+
+  describe "#likes?" do
+    subject { user.likes? dog }
+
+    let(:dog) { create(:dog) }
+    let(:user) { dog.user }
+
+    it { is_expected.to be false }
+
+    context "when a user has liked a dog" do
+      before { create :like, user: user, dog: dog }
+      it { is_expected.to be true }
+    end
+  end
 end
