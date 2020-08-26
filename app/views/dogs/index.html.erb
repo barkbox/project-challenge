@@ -1,1 +1,6 @@
+<%= form_tag dogs_path, method: :get do %>
+  <%= radio_button_tag :sort, "recent_likes", params[:sort] == "recent_likes" ? true : false %>
+  <%= label_tag :sort_likes, "Most likes in the last hour" %>
+  <%= submit_tag "Sort" %>
+<% end %>
 <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>

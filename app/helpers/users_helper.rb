@@ -1,10 +1,18 @@
 module UsersHelper
   def can_edit?(dog)
-    current_user.owner_of?(dog)
+    logged_in? &&
+      current_user.owner_of?(dog)
   end
 
   def can_like?(dog)
-    !current_user.owner_of?(dog)
+    logged_in? &&
+      !current_user.owner_of?(dog)
+  end
+
+  private
+
+  def logged_in?
+    current_user.present?
   end
 end
 
