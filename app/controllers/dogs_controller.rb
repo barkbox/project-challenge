@@ -1,10 +1,11 @@
 class DogsController < ApplicationController
-  before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :set_dogs, only: %i[index]
+  before_action :set_dog, only: %i[show edit update destroy]
+  before_action :redirect_unless_can_update, only: %i[edit update destroy]
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
   end
 
   # GET /dogs/1
@@ -74,5 +75,22 @@ class DogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
       params.require(:dog).permit(:name, :description, :images)
+    end
+
+    def redirect_unless_can_update
+      unless current_user.owner_of?(@dog)
+        flash[:notice] = "Oops you can't do that"
+        redirect_to dog_path(@dog)
+      end
+    end
+
+    def set_dogs
+      if params[:sort]
+        scope = params[:sort]
+      else
+        scope = :all
+      end
+
+      @dogs = Dog.send(scope)
     end
 end
