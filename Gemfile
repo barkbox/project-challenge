@@ -47,6 +47,8 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'rails-controller-testing'
+  gem "will_paginate", "~> 3.3"
+
 end
 
 group :development do
@@ -61,3 +63,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
