@@ -1,6 +1,5 @@
 <section>
   <h2><%= @dog.name %></h2>
-
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
   <% end %>
@@ -11,3 +10,4 @@
   <br>
   <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
 </section>
+
