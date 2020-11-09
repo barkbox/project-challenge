@@ -10,8 +10,8 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
-    @user = User.find(params[:id])
-    redirect_to root_path unless @user == current_user
+    # @user = User.find(params[:id])
+    # redirect_to root_path unless @user == current_user
   end
 
   # GET /dogs/new
@@ -27,7 +27,6 @@ class DogsController < ApplicationController
   def create
     @dog = Dog.new(dog_params)
     @dog.user_id = current_user.id
-    byebug
     respond_to do |format|
       if @dog.save
         @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
