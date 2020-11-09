@@ -4,7 +4,10 @@
   <%= f.file_field :image, as: :file, accept: "image/*", multiple: true%>
 
   <% if @dog.images.any? %>
-    <%= image_tag @dog.images.first %>
+      <% for dog_image in @dog.images %>
+        <%= image_tag dog_image %>
+      <% end %>
+    
   <% end %>
 
   <%= f.button :submit %>
