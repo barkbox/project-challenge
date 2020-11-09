@@ -9,7 +9,10 @@ class DogsController < ApplicationController
 
   # GET /dogs/1
   # GET /dogs/1.json
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    redirect_to new_user_session_path unless @user == current_user
+  end
 
   # GET /dogs/new
   def new
@@ -25,7 +28,6 @@ class DogsController < ApplicationController
     @dog = Dog.new(dog_params)
     @dog.user_id = current_user.id
     respond_to do |format|
-      byebug
       if @dog.save
         @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
 
@@ -75,4 +77,8 @@ class DogsController < ApplicationController
   def dog_params
     params.require(:dog).permit(:name, :description, :images, :user_id)
   end
+
+  # def redirect_user
+  #   redirect_to new_user_session_path unless @user == current_user
+  # end
 end
