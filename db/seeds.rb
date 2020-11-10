@@ -17,7 +17,7 @@ dogs = [
   },
   {
     name: 'Jax',
-    description: '',
+    description: ''
   },
   {
     name: 'Jiro',
@@ -31,7 +31,7 @@ dogs = [
     name: 'Bijou',
     description: 'Bijou is the fluffiest of them all'
   },
-    {
+  {
     name: 'Britta',
     description: 'Britta has two different colored eyes'
   },
@@ -46,16 +46,16 @@ dogs = [
   {
     name: 'Tonks',
     description: 'Tonks loves to run'
-  },
+  }
 ]
 
 dogs.each do |dog|
-  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description])
-  directory_name = File.join(Rails.root, 'db', 'seed', "#{dog[:name].downcase}", "*")
+  dog = Dog.find_or_create_by(name: dog[:name], description: dog[:description], user: User.all.sample)
+  directory_name = File.join(Rails.root, 'db', 'seed', dog[:name].downcase.to_s, '*')
 
   Dir.glob(directory_name).each do |filename|
-    if !dog.images.any?{|i| i.filename == filename}
-      dog.images.attach(io: File.open(filename), filename: filename.split("/").pop)
+    unless dog.images.any? { |i| i.filename == filename }
+      dog.images.attach(io: File.open(filename), filename: filename.split('/').pop)
       sleep 1
     end
   end

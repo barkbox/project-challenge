@@ -1,15 +1,19 @@
 class DogsController < ApplicationController
-  before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :set_dog, only: %i[show edit update destroy]
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @dogs = Dog.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    # @user = User.find(params[:id])
+    # redirect_to root_path unless @user == current_user
+    # Fetches current user's likes for show view template
+    @like = Like.where(user_id: current_user.id).where(dog_id: @dog.id).first if current_user
   end
 
   # GET /dogs/new
@@ -18,13 +22,13 @@ class DogsController < ApplicationController
   end
 
   # GET /dogs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /dogs
   # POST /dogs.json
   def create
     @dog = Dog.new(dog_params)
+    @dog.user_id = current_user.id
 
     respond_to do |format|
       if @dog.save
@@ -66,13 +70,15 @@ class DogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dog
-      @dog = Dog.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dog_params
-      params.require(:dog).permit(:name, :description, :images)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dog
+    @dog = Dog.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  # updated dog_params to handle multiple images
+  def dog_params
+    params.require(:dog).permit(:name, :description, images: [])
+  end
 end
