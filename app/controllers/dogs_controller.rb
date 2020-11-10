@@ -12,6 +12,8 @@ class DogsController < ApplicationController
   def show
     # @user = User.find(params[:id])
     # redirect_to root_path unless @user == current_user
+    # Fetches current user's likes for show view template
+    @like = Like.where(user_id: current_user.id).where(dog_id: @dog.id).first if current_user
   end
 
   # GET /dogs/new
@@ -27,6 +29,7 @@ class DogsController < ApplicationController
   def create
     @dog = Dog.new(dog_params)
     @dog.user_id = current_user.id
+
     respond_to do |format|
       if @dog.save
         @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
@@ -74,11 +77,8 @@ class DogsController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
+  # updated dog_params to handle multiple images
   def dog_params
-    params.require(:dog).permit(:name, :description, :user_id, images: [])
+    params.require(:dog).permit(:name, :description, images: [])
   end
-
-  # def redirect_user
-  #   redirect_to new_user_session_path unless @user == current_user
-  # end
 end
