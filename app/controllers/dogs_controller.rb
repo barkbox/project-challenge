@@ -1,5 +1,6 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /dogs
   # GET /dogs.json
@@ -14,17 +15,20 @@ class DogsController < ApplicationController
 
   # GET /dogs/new
   def new
+    redirect_to dogs_url, notice: 'Dog was successfully destroyed.' if current_user.nil?
     @dog = Dog.new
   end
 
   # GET /dogs/1/edit
   def edit
-    redirect_to(@dog, notice: 'You do not own this dog') unless @dog.owner == current_user
+    redirect_to(@dog, notice: 'You do not own this dog') if current_user.nil? || @dog.owner != current_user
   end
 
   # POST /dogs
   # POST /dogs.json
   def create
+    redirect_to(@dog, notice: 'You are not signed in.') if current_user.nil?
+
     @dog = Dog.new(dog_params)
     @dog.user = current_user
 
@@ -44,6 +48,7 @@ class DogsController < ApplicationController
   # PATCH/PUT /dogs/1
   # PATCH/PUT /dogs/1.json
   def update
+    redirect_to(@dog, notice: 'You do not own this dog.') if current_user.nil? || @dog.owner != current_user
     respond_to do |format|
       if @dog.update(dog_params)
         @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
@@ -60,7 +65,7 @@ class DogsController < ApplicationController
   # DELETE /dogs/1
   # DELETE /dogs/1.json
   def destroy
-    redirect_to(@dog, notice: 'You do not own this dog.') unless @dog.owner == current_user
+    redirect_to(@dog, notice: 'You do not own this dog.') if current_user.nil? || @dog.owner != current_user
     @dog.destroy
     respond_to do |format|
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
@@ -71,7 +76,7 @@ class DogsController < ApplicationController
   # GET /dogs/1/like
   # GET /dogs/1/like.json
   def like
-    redirect_to(@dog, notice: 'You own this dog.') if @dog.owner == current_user
+    redirect_to(@dog, notice: 'You own this dog.') if current_user.nil? || @dog.owner == current_user
 
     if current_user.voted_for? @dog
       status = 'unliked'
