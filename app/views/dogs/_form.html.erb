@@ -3,10 +3,8 @@
   <%= f.input :description, as: :text %>
   <%= f.input :images, as: :file, input_html: { multiple: true } %>
 
-  <% if @dog.images.any? %>
-    <% @dog.images.each do |image| %>
-      <%= image_tag image %>
-    <% end %>
+  <% @dog.images.each do |image| %>
+    <%= image_tag image %>
   <% end %>
 
   <%= f.button :submit %>
