@@ -19,6 +19,7 @@ class DogsController < ApplicationController
 
   # GET /dogs/1/edit
   def edit
+    redirect_to(@dog, notice: 'You do not own this dog') unless @dog.owner == current_user
   end
 
   # POST /dogs
@@ -59,6 +60,7 @@ class DogsController < ApplicationController
   # DELETE /dogs/1
   # DELETE /dogs/1.json
   def destroy
+    redirect_to(@dog, notice: 'You do not own this dog.') unless @dog.owner == current_user
     @dog.destroy
     respond_to do |format|
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
