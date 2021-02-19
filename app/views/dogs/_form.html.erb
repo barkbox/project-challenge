@@ -4,7 +4,9 @@
   <%= f.input :images, as: :file, input_html: { multiple: true } %>
 
   <% if @dog.images.any? %>
-    <%= image_tag @dog.images.first %>
+    <% @dog.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
   <% end %>
 
   <%= f.button :submit %>
