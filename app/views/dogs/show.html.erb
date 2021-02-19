@@ -1,5 +1,5 @@
 <section>
-  <h2><%= @dog.name %><%= link_to( (current_user.voted_for?(@dog) ? "💔" : "❤️"), like_dog_path(@dog)) unless @dog.owner == current_user %></h2>
+  <h2><%= @dog.name %><%= link_to( (current_user.voted_for?(@dog) ? "❤️" : "🤍"), like_dog_path(@dog), title: "click to #{current_user.voted_for?(@dog) ? 'unlike' : 'like'}") unless @dog.owner == current_user %></h2>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
