@@ -11,5 +11,7 @@
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
     <br>
     <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% else %>
+    <%= link_to( (current_user.voted_for?(@dog) ? "💔" : "❤️"), like_dog_path(@dog)) %>
   <% end %>
 </section>
