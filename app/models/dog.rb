@@ -8,4 +8,6 @@ class Dog < ApplicationRecord
   validates :owner, presence: true
   validates :description, presence: true
   validates :images, presence: true
+
+  acts_as_votable
 end
