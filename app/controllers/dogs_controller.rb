@@ -1,5 +1,5 @@
 class DogsController < ApplicationController
-  before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :set_dog, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /dogs
   # GET /dogs.json
@@ -68,9 +68,29 @@ class DogsController < ApplicationController
     end
   end
 
+  # GET /dogs/1/like
+  # GET /dogs/1/like.json
+  def like
+    redirect_to(@dog, notice: 'You own this dog.') if @dog.owner == current_user
+
+    if current_user.voted_for? @dog
+      status = 'unliked'
+      @dog.unliked_by current_user
+    else
+      status = 'liked'
+      @dog.liked_by current_user
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @dog, notice: "#{@dog.name} successfully #{status}." }
+      format.json { render :show, status: :ok, location: @dog }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dog
+      p params
       @dog = Dog.find(params[:id])
     end
 
