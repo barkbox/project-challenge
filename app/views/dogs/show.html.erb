@@ -1,5 +1,14 @@
 <section>
-  <h2><%= @dog.name %><%= link_to( (current_user&.voted_for?(@dog) ? "❤️" : "🤍"), like_dog_path(@dog), title: "click to #{current_user&.voted_for?(@dog) ? 'unlike' : 'like'}") unless current_user.nil? || @dog.owner == current_user %></h2>
+  <h2>
+    <%= @dog.name %>
+    <% unless current_user.nil? || @dog.owner == current_user %>
+      <% if current_user&.voted_for?(@dog) %>
+        <%= link_to "❤️", like_dog_path(@dog), title: "click to unlike", id: 'like_dog_link' %>
+      <% else %>
+        <%= link_to "🤍", like_dog_path(@dog), title: "click to like", id: 'unlike_dog_link' %>
+      <% end %>
+    <% end %>
+  </h2>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
