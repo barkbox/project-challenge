@@ -1,6 +1,5 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy, :like]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /dogs
   # GET /dogs.json
