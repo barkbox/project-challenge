@@ -1,5 +1,5 @@
 <section>
-  <h2><%= @dog.name %><%= link_to( (current_user.voted_for?(@dog) ? "❤️" : "🤍"), like_dog_path(@dog), title: "click to #{current_user.voted_for?(@dog) ? 'unlike' : 'like'}") unless @dog.owner == current_user %></h2>
+  <h2><%= @dog.name %><%= link_to( (current_user&.voted_for?(@dog) ? "❤️" : "🤍"), like_dog_path(@dog), title: "click to #{current_user&.voted_for?(@dog) ? 'unlike' : 'like'}") unless current_user.nil? || @dog.owner == current_user %></h2>
 
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
@@ -7,7 +7,7 @@
 
   <p><%= @dog.description %></p>
 
-  <% if @dog.owner == current_user %>
+  <% if current_user && @dog.owner == current_user %>
     <%= link_to "Edit #{@dog.name}'s Profile", edit_dog_path %>
     <br>
     <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
