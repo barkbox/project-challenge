@@ -84,15 +84,13 @@ class DogsController < ApplicationController
     redirect_to(@dog, notice: 'You own this dog.') if current_user.nil? || @dog.owner == current_user
 
     if current_user.voted_for? @dog
-      status = 'unliked'
       @dog.unliked_by current_user
     else
-      status = 'liked'
       @dog.liked_by current_user
     end
 
     respond_to do |format|
-      format.html { redirect_to @dog, notice: "#{@dog.name} successfully #{status}." }
+      format.html { redirect_to @dog }
       format.json { render :show, status: :ok, location: @dog }
     end
   end
