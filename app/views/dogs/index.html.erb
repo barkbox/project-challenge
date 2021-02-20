@@ -1,3 +1,8 @@
+<% if @sorted %>
+  <%= link_to "Unsort", root_path, title: "sort by likes", id: 'sort' %>
+<% else %>
+  <%= link_to "Sort by Likes", root_path + '?sort=likes', title: "unsort by likes", id: 'sort' %>
+<% end %>
 <%= will_paginate @dogs %>
 <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
 <%= will_paginate @dogs %>

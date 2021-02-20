@@ -4,7 +4,13 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.paginate(page: params[:page], per_page: 5)
+    if params[:sort] == 'likes'
+      dogs = Dog.order(:cached_weighted_average => :desc)
+    else
+      dogs = Dog
+    end
+    @sorted = params[:sort] == 'likes'
+    @dogs = dogs.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /dogs/1
