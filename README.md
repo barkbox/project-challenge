@@ -6,7 +6,7 @@ This repository contains starter code for a technical assessment. The challenges
 
 Fork this repository and clone locally
 
-You'll need [ruby 2.2.4](https://rvm.io/rvm/install) and [rails 5](http://guides.rubyonrails.org/getting_started.html#installing-rails) installed.
+You'll need [Ruby 2.5.7](https://rvm.io/rvm/install) and [Rails 5](https://guides.rubyonrails.org/v5.2/getting_started.html) installed.
 
 Run `bundle install`
 

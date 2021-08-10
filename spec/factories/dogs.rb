@@ -7,7 +7,8 @@ FactoryBot.define do
       dog.images.attach(
         io: File.open(Rails.root.join('spec', 'factories', 'images', 'bowie_toys.jpg')),
         filename: 'bowie_toys.jpeg',
-        content_type: 'image/jpeg')
+        content_type: 'image/jpeg'
+      )
     end
   end
 end
