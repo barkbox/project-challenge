@@ -1,0 +1,10 @@
+version: 1.0
+configuration:
+  has_webserver: true
+  ide_config:
+    default_open_files:
+      - Gemfile
+    project_menu:
+      run: rails s -p 3000
+      install: bundle install
+      test: RAILS_ENV=test rspec --format RspecJunitFormatter --out unit.xml  
